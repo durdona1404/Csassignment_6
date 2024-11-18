@@ -5,24 +5,20 @@ using namespace std;
 int main() {
     int n;
     cin >> n;
-    bool isValid = true;
+    int parked = 0;
     vector<int> parking;
     char a;
     while (cin>>a && a!='!') {
         parking.push_back(a-'0');
     }
-    for (int i=0;i<n;i++) {
-        for (int j=1;j<parking.size()-1;j++) {
-            if (parking[j-1]==1 && parking[j+1]==1) {
-                isValid = false;
-                break;
-            }else {
-                parking[j]=1;
-                isValid = true;
+        for (int i=0;i<parking.size();i++) {
+            if (parking[i]==0 &&(i == 0||parking[i-1]==0)&&(i==parking.size()-1 || parking[i+1]==0)) {
+                parking[i] = 1;
+                parked++;
             }
         }
-    }
-    if (isValid) {
+
+    if (parked==n) {
         cout<<"YES"<<endl;
     }else {
         cout<<"NO"<<endl;
